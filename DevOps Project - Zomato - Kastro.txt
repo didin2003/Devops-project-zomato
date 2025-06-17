@@ -90,16 +90,21 @@ Eclipse temurim installer, sonarqube scanner, nodej, OWASP dependency-check 5.5.
 docker api, docker-build-step,pipeline:stage view, promethieus metrics, email extension template 
 
 11. SonarQube configuration in Jenkins
-<Follow the process as explained in the video>
+ manage jenkins--> tools--> add jdk,give name as jdk17 ,install automatically ,add installer, install from adoptium.net, select jdk-17.0.8.1+1 
+ -->add sonarqube scanner--> name= sonar-scaner,insall automatically,
+-->add node js--> name=node23 
+--> add dependency check --> name= DP-Check ,install automatically ,add installer, install from github.com
+--add docker --> name=docker,install automatically,add installer ,download from docker.com 
+apply and save
 
-11.1. Tools Configuration in Jenkins
-<Follow the process as explained in the video>
 
 11.2. Configuration of SonarQube Token in Jenkins
-<Follow the process as explained in the video>
+on sonarqube -> admininstration-->security--> user--> rightside 3dots--> give any name --> generate token
+on jenkins --> manage jenkins-->credentials-->global--> add credentials--> kind=secret text --> on secret paste the token and give any name and description-->create
 
 Lets create another credentials for DockerHub. This is being done because, as soon as the docker image is created, it should get pushed to dockerhub. 
-<Follow the process as explained in the video>
+on jenkins --> manage jenkins-->credentials-->global--> add credentials-->kind=username with password--> username=give the username of dockerhub--> password=password of dockerhub-->create
+
 
 11.3 Configuration of Email notification in Jenkins
 As soon as the build happens, i need to get an email notification to do that we have to configure our email.
