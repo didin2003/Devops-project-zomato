@@ -15,23 +15,6 @@ pipeline {
         }
         stage ("Git Checkout") {
             steps {
-                git 'https://github.com/KastroVKiran/Zomato-Project-Kastro.git'
-            }
-        }
-        stage("Sonarqube Analysis"){
-            steps{
-                withSonarQubeEnv('sonar-server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=zomato \
-                    -Dsonar.projectKey=zomato '''
-                }
-            }
-        }
-        stage("Code Quality Gate"){
-           steps {
-                script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
-                }
-            } 
         }
         stage("Install NPM Dependencies") {
             steps {
@@ -49,7 +32,23 @@ pipeline {
                 sh "trivy fs . > trivy.txt"
             }
         }
-        stage ("Build Docker Image") {
+        stage ("Build Docker Image") {pipeline {
+    agent any
+    tools {
+        jdk 'jdk17'
+        nodejs 'node23'
+    }
+    environment {
+        SCANNER_HOME=tool 'sonar-scanner'
+    }
+    stages {
+        stage ("clean workspace") {
+            steps {
+                cleanWs()
+            }
+        }
+        stage ("Git Checkout") {
+            steps {
             steps {
                 sh "docker build -t zomato ."
             }
@@ -59,7 +58,7 @@ pipeline {
                 script {
                     withDockerRegistry(credentialsId: 'docker') {
                         sh "docker tag zomato kastrov/zomato:latest "
-                        sh "docker push kastrov/zomato:latest "
+                        sh "docker push didin8080/zomato:latest "
                     }
                 }
             }
@@ -68,9 +67,9 @@ pipeline {
             steps {
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh 'docker-scout quickview kastrov/zomato:latest'
-                       sh 'docker-scout cves kastrov/zomato:latest'
-                       sh 'docker-scout recommendations kastrov/zomato:latest'
+                       sh 'docker-scout quickview didin8080/zomato:latest'
+                       sh 'docker-scout cves didin8080/zomato:latest'
+                       sh 'docker-scout recommendations didin8080/zomato:latest'
                    }
                 }
             }
