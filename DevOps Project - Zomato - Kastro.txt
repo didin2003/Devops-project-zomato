@@ -112,10 +112,10 @@ As soon as the build happens, i need to get an email notification to do that we 
 
 
 12. System Configuration in Jenkins
-on jenkins--> manage jenkins--> system--> add sonarqube server -->give any name --> on server url= paste the url of sonarqube -->select the authentication --> apply and save .
+on jenkins--> manage jenkins--> system--> add sonarqube server -->give name as sonar-server--> on server url= paste the url of sonarqube -->select the authentication --> apply and save .
 
 13. Create webhook in SonarQube
-go to sonarqube -->administration--> configuration-->webhook-->give any name, cop the jenkins url and paste it on the url --> create 
+go to sonarqube -->administration--> configuration-->webhook-->give name as jenkins, cop the jenkins url and paste it on the url --> create 
 
 14. Create Pipeline Job
 Before pasting the pipeline script, do the following changes in the script
