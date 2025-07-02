@@ -579,6 +579,7 @@ That's it! You've successfully installed and set up Grafana to work with Prometh
 
 ## **Phase 3: Kubernetes**
 
+### Deploy the same Application on kubernetes.
 
 **Step 1: create kubectl on local system**
 
