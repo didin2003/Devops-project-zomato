@@ -19,3 +19,11 @@ spec:
         image: didin8080/react
         ports:
         - containerPort: 3000
+        env:
+         - name: EXTRA_ALLOWED_HOSTS
+           value: |
+             ac016abe27d704381b03a27ee26ed686-1512528316.us-west-1.elb.amazonaws.com
+         - name: POP.IP
+           valueFrom:
+             fieldRef:
+               fieldPath: status.podIP
