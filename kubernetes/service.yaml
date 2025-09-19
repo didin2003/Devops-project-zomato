@@ -6,8 +6,8 @@ metadata:
     app: react
 spec:
   type: LoadBalancer
+  selector:
+    app: react
   ports:
   - port: 3000
     targetPort: 3000
-  selector:
-    app: react
