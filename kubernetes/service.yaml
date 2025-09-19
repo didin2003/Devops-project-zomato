@@ -9,6 +9,6 @@ spec:
   selector:
     app: react
   ports:
-  - port: 3000
+  - Protocol: TCP
+    port: 80
     targetPort: 3000
-    protocol: TCP
